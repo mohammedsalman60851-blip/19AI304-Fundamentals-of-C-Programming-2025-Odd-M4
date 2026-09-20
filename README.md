@@ -41,7 +41,52 @@
 ### Step 14: 
   Stop
 # Program:
+#include <stdio.h>
+
+void validateDate()
+{
+    int day, month, year, leap = 0;
+
+    printf("Enter day: ");
+    scanf("%d", &day);
+
+    printf("Enter month: ");
+    scanf("%d", &month);
+
+    printf("Enter year: ");
+    scanf("%d", &year);
+
+    if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+        leap = 1;
+
+    if (year <= 0 || month < 1 || month > 12 || day < 1)
+    {
+        printf("Invalid date");
+        return;
+    }
+
+    if ((month == 2 && day > (leap ? 29 : 28)) ||
+        ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) ||
+        (day > 31))
+    {
+        printf("Invalid date");
+    }
+    else
+    {
+        printf("The date is valid.");
+    }
+}
+
+int main()
+{
+    validateDate();
+    return 0;
+}
 # Output:
+Enter day: 29
+Enter month: 2
+Enter year: 2024
+The date is valid.
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -89,7 +134,37 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 13: 
   Stop
 # Program:
+#include <stdio.h>
+
+int maximum(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+
+int minimum(int a, int b)
+{
+    return (a < b) ? a : b;
+}
+
+int main()
+{
+    int a, b, max, min;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    max = maximum(a, b);
+    min = minimum(a, b);
+
+    printf("Maximum = %d\n", max);
+    printf("Minimum = %d\n", min);
+
+    return 0;
+}
 # Output:
+Enter two numbers: 25 15
+Maximum = 25
+Minimum = 15
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -137,7 +212,38 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 11: 
  Stop
 # Program:
+#include <stdio.h>
+
+float celsiusToFahrenheit(float c)
+{
+    return (c * 9 / 5) + 32;
+}
+
+float fahrenheitToCelsius(float f)
+{
+    return (f - 32) * 5 / 9;
+}
+
+int main()
+{
+    float c, f;
+
+    printf("Enter temperature in Celsius: ");
+    scanf("%f", &c);
+    printf("Fahrenheit = %.2f\n", celsiusToFahrenheit(c));
+
+    printf("Enter temperature in Fahrenheit: ");
+    scanf("%f", &f);
+    printf("Celsius = %.2f\n", fahrenheitToCelsius(f));
+
+    return 0;
+}
 # Output:
+Enter temperature in Celsius: 25
+Fahrenheit = 77.00
+
+Enter temperature in Fahrenheit: 98.6
+Celsius = 37.00
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -185,7 +291,64 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 7: 
   Stop
 # Program:
+#include <stdio.h>
+
+void spiralPrint(int a[10][10], int r, int c)
+{
+    int top = 0, bottom = r - 1;
+    int left = 0, right = c - 1;
+    int i;
+
+    while (top <= bottom && left <= right)
+    {
+        for (i = left; i <= right; i++)
+            printf("%d ", a[top][i]);
+        top++;
+
+        for (i = top; i <= bottom; i++)
+            printf("%d ", a[i][right]);
+        right--;
+
+        if (top <= bottom)
+        {
+            for (i = right; i >= left; i--)
+                printf("%d ", a[bottom][i]);
+            bottom--;
+        }
+
+        if (left <= right)
+        {
+            for (i = bottom; i >= top; i--)
+                printf("%d ", a[i][left]);
+            left++;
+        }
+    }
+}
+
+int main()
+{
+    int a[10][10], r, c, i, j;
+
+    printf("Enter rows and columns: ");
+    scanf("%d %d", &r, &c);
+
+    printf("Enter elements:\n");
+    for (i = 0; i < r; i++)
+        for (j = 0; j < c; j++)
+            scanf("%d", &a[i][j]);
+
+    printf("Spiral order: ");
+    spiralPrint(a, r, c);
+
+    return 0;
+}
 # Output:
+Enter rows and columns: 3 3
+Enter elements:
+1 2 3
+4 5 6
+7 8 9
+Spiral order: 1 2 3 6 9 8 7 4 5
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -220,7 +383,41 @@ To build a C program to convert a string as described above, using a user-define
 ### Step 6: 
  Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void convertFirstCLastC(char str[])
+{
+    int i, len;
+
+    len = strlen(str);
+
+    for (i = 0; i < len; i++)
+    {
+        if (i == 0 || i == len - 1)
+            str[i] = toupper(str[i]);
+    }
+
+    printf("Converted string: %s", str);
+}
+
+int main()
+{
+    char str[100];
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    str[strcspn(str, "\n")] = '\0';
+
+    convertFirstCLastC(str);
+
+    return 0;
+}
 # Output:
+Enter a string: computer
+Converted string: ComputeR
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
